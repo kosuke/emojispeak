@@ -46,7 +46,7 @@ def process(object):
 
 PATTERN_TAG = re.compile(r'<[^>]+>')
 def remove_tags(str):
-    return PATTERN_TAG.sub('', str)
+    return PATTERN_TAG.sub('', str).replace("&quot;", "\"") # reverse escape
 
 def save_image(text, source_path, output_path): 
     # Check if the image needs to be updated 
