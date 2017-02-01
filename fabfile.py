@@ -12,8 +12,6 @@ from pelican.server import ComplexHTTPRequestHandler
 env.deploy_path = 'output'
 DEPLOY_PATH = env.deploy_path
 
-# Remote server configuration
-
 # Port for `serve`
 PORT = 8000
 

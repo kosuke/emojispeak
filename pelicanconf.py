@@ -92,21 +92,9 @@ FAVICON = SITEURL + '/images/icon.png'
 APPLEICON120 = FAVICON 
 COLOPHON = '© 2015-2017 Kosuke Katsuki'
 
-# Sitemap
-SITEMAP = {
-    'format': 'xml',
-    'priorities': {
-        'articles': 0.8,
-        'indexes': 0.5,
-        'pages': 0.5
-    },
-    'changefreqs': {
-        'articles': 'monthly',
-        'indexes': 'daily',
-        'pages': 'weekly'
-    }
-}
-
 # Plugin
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['emoji2png', 'sitemap']
+PLUGINS = ['emoji2png']
+# emoji-capture 
+CAPTURE_PATH = "../EmojiCapture/build/emojicapture"
+

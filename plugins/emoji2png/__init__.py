@@ -5,17 +5,30 @@ from pelican.readers import BaseReader
 import os, sys, re, subprocess
 from PIL import Image
 
-plugin_path = os.path.dirname(os.path.abspath(__file__))
-command = plugin_path + '/EmojiCapture/build/emojicapture' 
-if not os.path.exists(command):
-    command = plugin_path + '/emojicapture' 
-
-
-save_enabled = sys.platform == 'darwin' and os.path.exists(command)
+save_enabled = sys.platform == 'darwin' 
+command = os.path.dirname(os.path.abspath(__file__)) + '/emojicapture' 
 image_path = 'content/images/build/'
 
 def register():
+    signals.initialized.connect(initialize)
     signals.content_object_init.connect(process)
+
+def initialize(pelican_object): 
+    global command
+    if 'CAPTURE_PATH' in pelican_object.settings.keys():
+        command = pelican_object.settings['CAPTURE_PATH'] 
+        if not os.path.exists(command): 
+            print("emoji-caputure not found at ", command)
+    mkdir(image_path)
+
+def mkdir(folder):
+    import errno
+    try:
+        os.makedirs(folder)
+    except OSError as e: 
+        if e.errno == errno.EEXIST and os.path.isdir(folder):
+            pass
+        else: raise   
 
 def process(object):
     if not hasattr(object, 'emoji') :
