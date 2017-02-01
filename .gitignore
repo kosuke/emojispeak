@@ -1,0 +1,12 @@
+.DS_Store
+*.pyc
+*.swp
+*.swo
+output/
+temp/
+Apple\ Color\ Emoji.ttf
+content/images/build/*.png
+*.min.css
+*.min.js
+emojicapture
+

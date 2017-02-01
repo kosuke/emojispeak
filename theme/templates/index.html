@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel='bookmark' title='{{ SITENAME }}' href='{{ SITEURL}}'>
+<meta name="description" content="{{ SITEDESCRIPTION }}">
+{% endblock %}
+
+{% block pagination %}
+{% include 'pagination.html' %}
+{% endblock pagination %}
+
+{% block content %}
+<script>
+window.addEventListener('load', emojispeak.initIndex , false);
+</script>
+<section id="content">
+{% include 'content_ajax.html' %}
+</section>
+{% endblock content %}
+

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block pagination %}
+{% include 'pagination.html' %}
+{% endblock pagination %}
+
+{% block subnav %}
+<div id="nav-filter" class="nav filter hidden noselect" >
+    <span id="label-filter">Category: noun</span>
+    | <a href="{{ SITEURL }}">Show All</a>
+</div>
+{% endblock subnav %}
+
+{% block content %}
+<script>
+window.addEventListener('load', emojispeak.initSearch , false);
+</script>
+<section id="content">
+{% include 'content_ajax.html' %}
+</section>
+{% endblock content %}
+

@@ -1,0 +1,29 @@
+{% if DEFAULT_PAGINATION %}
+    <span class="numbers">{{ articles_page.number }} / {{ articles_paginator.num_pages }}</span>
+    {% if articles_page.has_previous() %}
+        <a href="{{ SITEURL }}/{{ articles_previous_page.url }}">&laquo;</a>
+    {% else %}
+        <span class="spacer">&laquo;</span>
+    {% endif %}
+    {% if articles_page.has_next() %}
+        <a href="{{ SITEURL }}/{{ articles_next_page.url }}">&raquo;</a>
+    {% else %}
+        <span class="spacer">&raquo;</span>
+    {% endif %}
+
+    {% else %}
+<div class="nav nav-page hidden noselect" >
+    <a id="button-previous" rel="prev" class="button" ontouchstart="">
+        <i class="material-icons">navigate_before</i>
+    </a>
+    <p id="page">000 of 000</p>
+    <a id="button-next" rel="next" class="button" ontouchstart="">
+        <i class="material-icons">navigate_next</i>
+    </a>
+    <!--
+        <button id="button-share">
+        <i class="material-icons">share</i>
+        </button>
+    -->
+</div>
+{% endif %}

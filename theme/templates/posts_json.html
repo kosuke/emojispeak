@@ -1,0 +1,30 @@
+{% block content %}
+[
+    {
+        "count" : {{ articles | count }},
+        "url" : "{{ SITEURL }}"
+    },
+{% for article in articles | reverse %}
+    {% if article.emoji is defined %}
+    {
+        "title": "{{ article.title }}",
+        "kana": "{{ article.kana }}",
+        "romaji": "{{ article.romaji }}",
+        "english": "{{ article.english }}",
+        "slug": "{{ article.slug }}",
+        "category": "{{ article.category }}",
+        "url": "{{ article.url }}",
+        "created": "{{ article.locale_date }}",
+        "modified": "{{ article.locale_modified }}",
+        "tags": [{% for t in article.tags %}"{{ t.name }}", "{{ t.slug }}"{%- if not loop.last %}, {% endif %}{% endfor %}],
+        "tagurls": [{% for t in article.tags %}"{{ t.url }}"{%- if not loop.last %},{% endif %}{% endfor %}],
+        "width": "{{ article.emoji_width }}",
+        "height": "{{ article.emoji_height }}"
+    }
+    {%- if not loop.last %}, {% endif %}
+
+    {% endif %}
+{% endfor %}
+]
+{% endblock %}
+

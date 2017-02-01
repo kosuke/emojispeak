@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }} - {{ SITENAME }}{% endblock %}
+{% block head %}
+{{ super()  }}
+{% for keyword in article.keywords %}
+<meta name="keywords" content="{{ keyword }}" />
+{% endfor %}
+
+{% if article.emoji is defined %}
+<meta name="description" content="English: {{ article.english }}, Japanese: {{ article.title }}" />
+{% endif %}
+
+{% for description in article.description %}
+<meta name="description" content="{{ description }}" />
+{% endfor %}
+
+{% for tag in article.tags %}
+<meta name="tags" content="{{ tag }}" />
+{% endfor %}
+
+{% endblock %}
+
+{% block pagination %}
+{% include 'pagination.html' %}
+{% endblock pagination %}
+
+{% block content %}
+<section id="content">
+    {% include 'content.html' %}
+</section>
+{% if article.status == 'published' %}
+<script>
+window.addEventListener('load', 
+    function () {
+        emojispeak.initPost('{{ SITEURL }}/index.html', 
+            {{ articles|length - articles.index(article) }},
+            {{ articles|length }});
+    } , false);
+</script>
+{% endif %}
+{% endblock %}

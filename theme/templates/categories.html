@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Categories - {{ SITENAME }}{% endblock %}
+
+{% macro category_list(name, filtered) -%}
+    <h2>{{ name }}</h2>
+    {%- for category, articles in filtered|sort %}
+    <h3><a href="{{ SITEURL }}/search.html#cat={{ category }}">{{ category|capitalize }}</a></h3>
+    <ul>
+        {%- for article in articles |sort(attribute='english') %}
+        <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.english }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{%- endmacro %}
+
+{% block content %}
+<article class="post">
+    <h1>All Categories</h1>
+    {{category_list('Sentences', categories|category_sentences())}}
+    {{category_list('Words', categories|category_words())}}
+    {{category_list('Other', categories|category_other())}}
+</article>
+<script>
+window.addEventListener('load', emojispeak.initPage , false);
+</script>
+{% endblock %}

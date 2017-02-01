@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ page.title }} - {{ SITENAME }}{% endblock %}
+{% block content %}
+    <article class="post">
+        <h2>{{ page.title }}</h2>
+        {% import 'translations.html' as translations with context %}
+        {{ translations.translations_for(page) }}
+        {{ page.content }}
+        {% if page.modified %}
+        <p>
+        Last updated: {{ page.locale_modified }}
+        </p>
+        {% endif %}
+    </article>
+<script>
+window.addEventListener('load', emojispeak.initPage , false);
+</script>
+{% endblock %}

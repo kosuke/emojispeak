@@ -1,0 +1,55 @@
+<article id="post" class="post">
+    <h2>
+        <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" class="post-title" title="Permalink to {{ article.title|striptags }}">
+            {{ article.title }}
+        </a>
+    </h2>
+    {% if article.emoji is defined %}
+        <img class="emoji" src="{{ SITEURL }}/images/build/{{ article.slug }}.png" width="{{ article.emoji_width }}" height="{{ article.emoji_height }}" alt="{{ article.emoji_alt |e }}" />
+        {% if article.kana is defined %}
+            <p class="kana">{{ article.kana }}</p>
+        {% endif %}
+        {% if article.romaji is defined %}
+            <p class="alphabet">{{ article.romaji }}</p>
+        {% endif %}
+        {% if article.english is defined %}
+            <p class="translation">{{ article.english }}</p>
+        {% endif %}
+    {% else %}
+        {{ article.content }}
+    {% endif %}
+    <footer class="post-info small">
+        {% if article.tags is defined %}
+        <ul class="tags">
+        {% for tag in article.tags %}
+            <li>
+                <a href="{{ SITEURL }}/search.html#tag={{ tag.slug }}">#{{ tag.name }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        <p>
+            <abbr class="social" title="Google Plus">
+                <a href="https://plus.google.com/share?url={{ SITEURL }}/{{ article.url }}" target="_blank">g+</a>
+            </abbr>
+            <abbr class="social" title="Facebook">
+                | <a href="https://www.facebook.com/sharer/sharer.php?u={{ SITEURL }}/{{ article.url }}" target="_blank">fb</a>
+            </abbr>
+            <abbr class="social" title="Twitter">
+                | <a href="https://twitter.com/share?url={{ SITEURL }}/{{ article.url }}&amp;text={{ article.title }}" target="_blank">tweet</a>
+            </abbr>
+            <abbr class="published" title="{{ article.date.isoformat() }}">
+                | <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">
+                {{ article.locale_date }}
+                </a>
+            </abbr>
+        </p>
+        {% if article.modified %}
+        <p>
+            <abbr class="modified" title="{{ article.modified.isoformat() }}">
+                Modified: {{ article.locale_modified }}
+            </abbr>
+        </p>
+        {% endif %}
+    </footer>
+</article>
