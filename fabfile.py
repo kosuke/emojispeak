@@ -62,7 +62,6 @@ def create():
     newFile.close()
     print("Created file: ", newFile.name)
     # Open the file in TextEdit
-    # FIXME: local()
     subprocess.check_call(["open", "-a", "TextEdit", newFile.name, ]) 
 
 @task
@@ -153,7 +152,7 @@ def reserve():
     serve()
 
 @task
-def reserve_nodraft():
+def nodraft():
     """`build`, then `serve` with no draft"""
     build(nodraft=True)
     serve()
@@ -179,5 +178,4 @@ def gs():
     image_dir = local_dir + 'images'
     local('gsutil -m -h "Cache-Control:public, max-age=2592000" cp -n -r {0} {1}'.format(image_dir, GS_HOST))
     local('gsutil -m rsync -d -R {0} {1}'.format(local_dir, GS_HOST))
-    #local('gsutil -m setmeta -h "Cache-Control:public, max-age=2592000" {0}images/*.png'.format(GS_HOST))
 
