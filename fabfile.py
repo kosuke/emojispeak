@@ -167,7 +167,7 @@ def preview():
 @task
 def rpi():
     """Copy to Raspberry Pi2 via rsync"""
-    local('rsync -av -e ssh . ' + RPI_HOST)
+    local('rsync -avz --delete --exclude-from=rsync-exclude -e ssh . ' + RPI_HOST)
 
 @task
 def gs():
@@ -178,6 +178,6 @@ def gs():
     local_dir = DEPLOY_PATH.rstrip('/') + '/'
     image_dir = local_dir + 'images'
     local('gsutil -m -h "Cache-Control:public, max-age=2592000" cp -n -r {0} {1}'.format(image_dir, GS_HOST))
-    local('gsutil -m rsync -d -R {0} {1}'.format(local_dir))
+    local('gsutil -m rsync -d -R {0} {1}'.format(local_dir, GS_HOST))
     #local('gsutil -m setmeta -h "Cache-Control:public, max-age=2592000" {0}images/*.png'.format(GS_HOST))
 

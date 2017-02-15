@@ -1,0 +1,9 @@
+.DS_Store
+.git
+.gitignore
+*.swp
+*.swo
+*.ttf
+*.pyc
+__pycache__
+rsync-exclude
