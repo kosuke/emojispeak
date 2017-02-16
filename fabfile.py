@@ -166,7 +166,7 @@ def preview():
 @task
 def rpi():
     """Copy to Raspberry Pi2 via rsync"""
-    local('rsync -avz --delete --exclude-from=rsync-exclude -e ssh . ' + RPI_HOST)
+    local('rsync -avz --delete --checksum --exclude-from=rsync-exclude -e ssh . ' + RPI_HOST)
 
 @task
 def gs():
