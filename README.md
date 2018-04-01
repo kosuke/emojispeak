@@ -1,6 +1,6 @@
 # Emojispeak 
 
-Source code of [emojispeak.com](http://emojispeak.com). The website is statically generated using [Pelican](https://github.com/getpelican/pelican), and updated daily by a cron job that runs on a Raspberry Pi 2.   
+Source code of [emojispeak.com](https://emojispeak.com). The website is statically generated using [Pelican](https://github.com/getpelican/pelican), and updated daily by a cron job that runs on a Raspberry Pi 2.   
 
 Note that this repository doesn't include the contents of the website.
 
@@ -14,7 +14,7 @@ Note that this repository doesn't include the contents of the website.
         $ pip install pillow jsmin rcssmin python-slugify
 
 * For editing/generating emoji images: 
-    * macOS 10.12  
+    * macOS 10.13  
     * [Emoji Capture](https://github.com/kosuke/emoji-capture) 
     * [OptiPNG](http://optipng.sourceforge.net) 
 
@@ -36,8 +36,8 @@ To synchronize the entire folder with a remote server (e.g., Raspberry Pi in you
 
     $ fab rpi
 
-To publish the website to Google Cloud Storage (requires Google Cloud SDK):
+To publish the website to Firebase (requires Firebase CLI):
 
-    $ fab gs
+    $ fab firebase
 
 
