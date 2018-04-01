@@ -11,6 +11,7 @@ sys.path.append(os.curdir)
 from pelicanconf import *
 
 SITEURL = 'http://localhost:8000'
+
 GOOGLE_ANALYTICS = True
 GOOGLE_ANALYTICS_ID = ''
 

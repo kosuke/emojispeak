@@ -18,9 +18,6 @@ PORT = 8000
 # Remote server/RPi
 RPI_HOST = 'root@localhost:22:/var/www'
 
-# Google Cloud
-GS_HOST = 'gs://example.com/'
-
 # Temp directory used by create()
 CONTENT_PATH = "content"
 TEMP_PATH = "temp"
@@ -33,6 +30,7 @@ def mkdir(folder):
         if e.errno == errno.EEXIST and os.path.isdir(folder):
             pass
         else: raise        
+
 @task
 def create():
     """Create new post"""
@@ -169,13 +167,31 @@ def rpi():
     local('rsync -avz --delete --checksum --exclude-from=rsync-exclude -e ssh . ' + RPI_HOST)
 
 @task
-def gs():
-    """Publish to Google Cloud"""
+def firebase():
+    """Publish to Firebase"""
     clean()
     local('pelican -s publishconf.py')
     minify()
-    local_dir = DEPLOY_PATH.rstrip('/') + '/'
-    image_dir = local_dir + 'images'
-    local('gsutil -m -h "Cache-Control:public, max-age=2592000" cp -n -r {0} {1}'.format(image_dir, GS_HOST))
-    local('gsutil -m rsync -d -R {0} {1}'.format(local_dir, GS_HOST))
 
+    # Hash
+    local(';'.join([
+        'if command -v md5 >/dev/null 2>&1',
+        '  then _md5="md5 -r"',
+        '  else _md5="md5sum"',
+        'fi',
+        'find ./output -not -path "*sitemap.xml" -type f -exec $_md5 {} \\; > .output_new.md5'
+    ]))
+
+    # Diff
+    local(';'.join([
+        'if cmp -s .output.md5 .output_new.md5',
+        '  then echo "No Change"',
+        '       rm -f .output_new.md5',
+        '  else echo "Detected changes"',
+        '       if [ -n "$FIREBASE_TOKEN" ]',
+        '         then firebase deploy --token "$FIREBASE_TOKEN"',
+        '         else firebase deploy',
+        '       fi',
+        '       mv -f .output_new.md5 .output.md5',
+        'fi'
+    ]))

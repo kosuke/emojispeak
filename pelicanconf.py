@@ -88,13 +88,14 @@ DEFAULT_PAGINATION = 0
 # Theme
 THEME = 'theme'
 GOOGLE_FONTS = ['Gentium+Book+Basic', 'Material+Icons']
-FAVICON = SITEURL + '/images/icon.png'
-APPLEICON120 = FAVICON 
-COLOPHON = '© 2015-2017 Kosuke Katsuki'
+FAVICON = '/images/icon.png'
+APPLEICON120 = FAVICON
+COLOPHON = '© 2015-2018 Kosuke Katsuki'
 
 # Plugin
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['emoji2png']
+PLUGINS = ['emoji2png', 'sitemap']
+
 # emoji-capture 
 CAPTURE_PATH = "../EmojiCapture/build/emojicapture"
 

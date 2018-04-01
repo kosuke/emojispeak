@@ -12,14 +12,14 @@
         {% endif %}
         {% if GOOGLE_FONTS %}
         {% for font in GOOGLE_FONTS %}
-        <link href='http://fonts.googleapis.com/css?family={{ font }}' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family={{ font }}' rel='stylesheet' type='text/css'>
         {% endfor %}
         {% endif %}
         {% endblock head %}
         <meta name="keywords" content="{{ SITEKEYWORDS }}">
-        <link rel="shortcut icon" href="{{ FAVICON }}" type="image/png">
-        <link rel="apple-touch-icon"  href="{{ APPLEICON120 }}" type="image/png" >
-        <link rel="apple-touch-icon"  href="{{ APPLEICON120 }}" sizes="120x120" type="image/png" >
+        <link rel="shortcut icon" href="{{ SITEURL + FAVICON }}" type="image/png">
+        <link rel="apple-touch-icon"  href="{{ SITEURL + APPLEICON120 }}" type="image/png" >
+        <link rel="apple-touch-icon"  href="{{ SITEURL + APPLEICON120 }}" sizes="120x120" type="image/png" >
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/main.min.css" type="text/css" />
         <script src="{{ SITEURL }}/theme/js/es.min.js"></script>
